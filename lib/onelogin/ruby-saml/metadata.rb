@@ -1,7 +1,7 @@
 require "uri"
-require "uuid"
 
 require "onelogin/ruby-saml/logging"
+require "onelogin/ruby-saml/utils"
 
 # Only supports SAML 2.0
 module OneLogin
@@ -40,7 +40,7 @@ module OneLogin
           add_sp_cert(sp_sso, "encryption", cert, intermediate_certs)
         end
 
-        root.attributes["ID"] = "_" + UUID.new.generate
+        root.attributes["ID"] = OneLogin::RubySaml::Utils.uuid
         if settings.issuer
           root.attributes["entityID"] = settings.issuer
         end
